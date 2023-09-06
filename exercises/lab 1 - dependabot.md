@@ -123,4 +123,32 @@ If a PR has dependency changes, you can [review](https://docs.github.com/en/gith
 
 #### Configure Dependabot for private artifactory
 
+Dependabot can be configured to look up artifacts from a private artifactory (like JFrog, Azure Artifacts, Nexus, etc.) instead of looking up dependencies in public artifacts like Maven Central. These private registries are similar to their public equivalents, but they require authentication and are only available to members of your team or company.
+
+For this exercise we will modify the `.github/dependabot.yml` file to include the following configuration changes:
+1. We used **Azure Artifacts** for creating a Maven artifact storage
+2. Create an AZURE_USER & AZURE_TOKEN secret key for dependabot under the repository settings
+3. To demostrate this integration we are focusing on the Java code that is bundled in the repo under the `storage-service` directory in the root
+4. We explicitly define the `directory` element in `dependabot.yml` to point to the folder where the pom.xml for this java code base is located
+5. The `url` corresponds to the url of the private artifactory (Azure Artifacts in this case) 
+
+```
+version: 2
+registries:
+  maven-artifactory:
+    type: maven-repository
+    url: https://pkgs.dev.azure.com/abhishekdutta0893/_packaging/abhishekdutta0893/maven/v1
+    username: ${{secrets.AZURE_USER}}
+    password: ${{secrets.AZURE_TOKEN}}
+ 
+updates:
+  - package-ecosystem: "maven"
+    directory: "/storage-service"
+    registries:
+      - maven-artifactory
+    schedule:
+      interval: "daily"
+
+```
+
 💡**Now that we're familiar with Dependabot, let's head over to the secret scanning section, and learn more about it! [Click here](lab%202%20-%20secret-scanning.md).** 💡
