@@ -127,7 +127,7 @@ Dependabot can be configured to look up artifacts from a private artifactory (li
 
 For this exercise we will modify the `.github/dependabot.yml` file to include the following configuration changes:
 1. We used **Azure Artifacts** for creating a Maven artifact storage
-2. Create an AZURE_USER & AZURE_TOKEN secret key for dependabot under the repository settings
+2. Create an AZURE_USER & AZURE_TOKEN secret key for dependabot under the repository settings. More details on Azure Artifacts can be found [here](https://learn.microsoft.com/en-us/azure/devops/artifacts/get-started-maven?view=azure-devops)
 3. To demostrate this integration we are focusing on the Java code that is bundled in the repo under the `storage-service` directory in the root
 4. We explicitly define the `directory` element in `dependabot.yml` to point to the folder where the pom.xml for this java code base is located
 5. The `url` corresponds to the url of the private artifactory (Azure Artifacts in this case) 
@@ -150,5 +150,13 @@ updates:
       interval: "daily"
 
 ```
+
+6. To validate if Dependabot is actually trying to resolve the dependencies from Azure Artifacts instead to going to a public Maven repo in this case, navigate to Insights -> Dependency Graph -> Dependabot within the repo
+
+![Alt text](image.png)
+
+7. Expanding the logs in this stage you can validate that all the dependency resolution is happening by querying the Azure Artifact endpoint which is configured with Maven Feed 
+
+![Alt text](image-1.png)
 
 💡**Now that we're familiar with Dependabot, let's head over to the secret scanning section, and learn more about it! [Click here](lab%202%20-%20secret-scanning.md).** 💡
