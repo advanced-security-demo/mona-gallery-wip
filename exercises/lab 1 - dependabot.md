@@ -7,6 +7,7 @@
 - [Viewing and managing results](#viewing-and-managing-results)
 - [Enabling Dependabot security updates](#enabling-dependabot-security-updates)
 - [Configuring Dependabot security updates](#configuring-dependabot-security-updates)
+- [Configure Dependabot for private artifactory](#configuring-dependabot-for-private-artifactory)
 
 ### _**Lab 1**_
 
@@ -119,5 +120,7 @@ If a PR has dependency changes, you can [review](https://docs.github.com/en/gith
     ```
    2. Create a PR, and click on `Files changed`.
    3. Click on the `Display the rich diff` button on the `requirements.txt` file to review dependency changes.
+
+#### Configure Dependabot for private artifactory
 
 💡**Now that we're familiar with Dependabot, let's head over to the secret scanning section, and learn more about it! [Click here](lab%202%20-%20secret-scanning.md).** 💡
